@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/Pit.png" type="Texture" id=1]
+[ext_resource path="res://Pit.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Falling"
@@ -20,9 +21,10 @@ tracks/0/keys = {
 [node name="Node2D" type="Node2D"]
 
 [node name="Pit" type="StaticBody2D" parent="."]
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Pit"]
-position = Vector2( 0, -5 )
+position = Vector2( 0, -5.19842 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 5

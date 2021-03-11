@@ -93,5 +93,4 @@ func walk():
 		walking = false	
 		final_position.x = ceil(player.global_position.x)
 		final_position.y = player.global_position.y + 9
-		print('Final destination ', final_position)
 	

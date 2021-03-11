@@ -42,5 +42,4 @@ func spawn_pit():
 	spawn.y = (rng.randi_range(1,room.height)*grid_size)-(grid_size/2);
 	positions['pit'] = spawn
 	pit.global_position = spawn
-	print('Spawning pit at ', positions['pit'])
 	add_child(pit)
