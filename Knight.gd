@@ -14,6 +14,7 @@ var initial_position = Vector2()
 var sprite
 var final_position = Vector2()
 var falling = false
+var monster_turn = false
 
 func _ready():
 	player = get_node(".")
@@ -93,4 +94,4 @@ func walk():
 		walking = false	
 		final_position.x = ceil(player.global_position.x)
 		final_position.y = player.global_position.y + 9
-	
+		monster_turn = true
