@@ -26,10 +26,14 @@ func _ready():
 	add_child(player)
 
 func _process(delta):
-	if player_body.final_position == oubliette.positions['pit']:
-		print('Fell in pit')
-	
-	
+	if !player_body.falling:
+		if player_body.final_position == oubliette.positions['pit']:
+			player.hide()
+			player_body.falling = true
+			var pit = oubliette.pit.get_node("Pit")
+			pit.get_node("AnimationPlayer").play("Falling")
+			
+			
 	
 	
 	

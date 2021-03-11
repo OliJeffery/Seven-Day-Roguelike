@@ -13,6 +13,7 @@ var room_area = Vector2()
 var initial_position = Vector2()
 var sprite
 var final_position = Vector2()
+var falling = false
 
 func _ready():
 	player = get_node(".")
@@ -21,7 +22,7 @@ func _ready():
 
 func _physics_process(delta):
 	
-	if !walking:
+	if !walking && !falling:
 		
 		$Sprite/AnimationPlayer.play("Idle")
 	
