@@ -13,7 +13,7 @@ func _ready():
 	#starting_room.height=6
 	add_child(starting_room)
 	
-	var tilemap = starting_room.get_node('TileMap')
+	var tilemap = starting_room.get_node('Floor')
 	var room_height = tilemap.height * grid_size
 	var room_width = tilemap.width * grid_size
 	var room_area = Vector2(room_width, room_height)

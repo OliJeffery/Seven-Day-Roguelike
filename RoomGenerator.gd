@@ -12,7 +12,7 @@ var grid_size
 
 func _ready():
 	rng.randomize()
-	room = get_node("TileMap")
+	room = get_node("Floor")
 	area = room.width * room.height
 	number_of_monsters = floor(area * monster_ratio)
 	spawn_monsters()
@@ -28,3 +28,4 @@ func spawn_monsters():
 		var slime_instance = slime.instance()
 		slime_instance.global_position = spawn
 		add_child(slime_instance)
+
