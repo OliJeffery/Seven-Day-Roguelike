@@ -32,5 +32,12 @@ func tile():
 	return 0
 
 func get_room_size():
-	width = rng.randi_range(2, 10)
-	height = rng.randi_range(2,10)
+	var parent = get_parent()
+	if parent.width != null:
+		width = parent.width
+	else:
+		width = rng.randi_range(2, 10)
+	if parent.height != null:
+		height = parent.height
+	else:
+		height = rng.randi_range(2,10)
