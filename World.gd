@@ -9,8 +9,8 @@ func _ready():
 	var starting_room = room.instance()
 	starting_room.set_name("starting_room")
 	starting_room.grid_size = grid_size
-	#starting_room.width=6
-	#starting_room.height=6
+	starting_room.width=6
+	starting_room.height=6
 	add_child(starting_room)
 	
 	var tilemap = starting_room.get_node('Floor')
