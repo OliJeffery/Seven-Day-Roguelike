@@ -24,6 +24,11 @@ func _process(delta):
 			player.z_index = 0	
 		if monster_turn:
 			print('monster_turn')
+			var slimes = oubliette.get_tree().get_nodes_in_group('slimes')
+			for slime in slimes:
+				var slime_body = slime.get_node('slime_body')
+				slime_body.moving = true
+				slime_body.player_position = player_body.global_position
 			player_body.monster_turn = false
 			
 func pit_goes_nom():

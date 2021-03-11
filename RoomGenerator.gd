@@ -29,7 +29,9 @@ func spawn_monsters():
 		spawn.x = (rng.randi_range(1,room.width)*grid_size)-(grid_size/2);
 		spawn.y = (rng.randi_range(1,room.height)*grid_size)-(grid_size/2) - 2;
 		slime_instance.global_position = spawn
+		slime_instance.get_node('slime_body').grid_size = grid_size
 		add_child(slime_instance)
+		slime_instance.add_to_group('slimes')
 		
 func spawn_door():
 	door.z_index = 2
