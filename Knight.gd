@@ -11,11 +11,12 @@ var direction
 var continue_moving = false
 var room_area = Vector2()
 var initial_position = Vector2()
-
+var sprite
 
 func _ready():
 	player = get_node(".")
 	player.global_position = initial_position
+	sprite = player.get_node("Sprite")
 
 func _physics_process(delta):
 	
@@ -70,8 +71,10 @@ func _physics_process(delta):
 func walk():
 	$Sprite/AnimationPlayer.play("Walking")
 	if direction == "right" && player.global_position.x < destination.x:
+		sprite.set_flip_h(false)
 		continue_moving = true
 	elif direction == "left" && player.global_position.x > destination.x:
+		sprite.set_flip_h(true)
 		continue_moving = true
 	elif direction == "up" && player.global_position.y > destination.y:
 		continue_moving = true
