@@ -45,8 +45,8 @@ func get_room_size():
 	if parent.width != null:
 		width = parent.width
 	else:
-		width = rng.randi_range(2, 10)
+		width = rng.randi_range(4, 10)
 	if parent.height != null:
 		height = parent.height
 	else:
-		height = rng.randi_range(2,10)
+		height = rng.randi_range(4,10)

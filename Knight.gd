@@ -12,6 +12,7 @@ var continue_moving = false
 var room_area = Vector2()
 var initial_position = Vector2()
 var sprite
+var final_position = Vector2()
 
 func _ready():
 	player = get_node(".")
@@ -87,6 +88,9 @@ func walk():
 		move_and_collide(motion)
 	else:
 		# Sets the position exactly to stop miscalculations due to delta
-		player.global_position = destination 
+		player.global_position = destination		
 		walking = false	
+		final_position.x = ceil(player.global_position.x)
+		final_position.y = player.global_position.y + 9
+		print('Final destination ', final_position)
 	
