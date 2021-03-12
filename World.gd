@@ -10,10 +10,11 @@ var fall_distance = 6
 var gravity = 100
 var monster_turn
 var monster_ratio = 0
-var treasure_ratio = .15
+var treasure_ratio = 1
 var weapon = load("res://sword_rusty.tscn")
 var game_over = false
 var level = 0
+var chest_open = false
 
 func _ready():
 	print('NEW GAME')
@@ -24,9 +25,9 @@ func _process(delta):
 		if player_body.dead:
 			game_over()
 		if !player_body.falling:
-			monster_turn = player_body.monster_turn
-			if player_body.final_position == oubliette.positions['pit']:
-				pit_goes_nom()
+			check_for_pit()
+			if !chest_open:
+				chest_open = check_for_treasure()	
 			if oubliette.global_position.y > 0:
 				player_body.scene_loading = true
 				oubliette.global_position.y -= gravity*delta
@@ -51,13 +52,33 @@ func pit_goes_nom():
 	var pit = oubliette.pit.get_node("Pit")
 	pit.get_node("AnimationPlayer").play("Falling")
 	yield(pit.get_node("AnimationPlayer"), "animation_finished")
-	new_room()	
+	new_room()
 	
+func check_for_pit():
+	monster_turn = player_body.monster_turn
+	if player_body.final_position == oubliette.positions['pit']:
+		pit_goes_nom()
+
+func check_for_treasure():
+	var open_treasure = false
+	var player_position = player_body.final_position
+	var chest_position = oubliette.positions['chest']
+	if	player_position.y == chest_position.y:
+		if player_position.x == chest_position.x + grid_size or player_position.x == chest_position.x - grid_size:
+			open_treasure = true
+	elif	player_position.x == chest_position.x:
+		if player_position.y == chest_position.y + grid_size or player_position.y == chest_position.y - grid_size:
+			open_treasure = true
+	if open_treasure:
+		print("Opening treasure")
+	return open_treasure	
+			
 func new_room():
 	level +=1
 	print("LEVEL ", level)
 	if oubliette:
 		destroy_room()
+	chest_open = false
 	oubliette = generator.instance()
 	oubliette.monster_ratio = monster_ratio
 	oubliette.treasure_ratio = treasure_ratio
