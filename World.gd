@@ -134,4 +134,6 @@ func get_treasure():
 	elif treasure == 3:
 		weapon = load("res://key.tscn")
 	
+	player_body.weapon.queue_free()
 	player_body.weapon = weapon.instance()
+	player_body.update_weapon()

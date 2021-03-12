@@ -83,7 +83,9 @@ func _physics_process(delta):
 			
 	if walking:
 		walk()
-		
+
+func update_weapon():
+	add_child(weapon)
 
 func walk():
 	$Sprite/AnimationPlayer.play("Walking")
