@@ -30,12 +30,13 @@ func attack():
 					if player_position.x+1 == monster_position.x:	
 						slime_body.die()
 		if room.treasure == 1 or room.treasure == 2:
-			if player.direction == "left":
-				if player_position.x-1 == monster_position.x:
-					slime_body.die()
-			else:
-				if player_position.x+1 == monster_position.x:	
-					slime_body.die()
+			if player_position.y == monster_position.y or player_position.y+1 == monster_position.y or player_position.y-1 == monster_position.y:
+				if player.direction == "left":
+					if player_position.x-1 == monster_position.x:
+						slime_body.die()
+				else:
+					if player_position.x+1 == monster_position.x:	
+						slime_body.die()
 
 
 func gridify():
