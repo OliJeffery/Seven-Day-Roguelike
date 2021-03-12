@@ -44,7 +44,6 @@ func _physics_process(delta):
 			if player_can_attack():
 				weapon.attack()
 				player_turn_over()
-			
 			print('No mobs nearby')
 	
 		if Input.is_action_just_pressed("ui_right"):
@@ -138,11 +137,13 @@ func player_can_attack():
 		gridify()
 		if room.treasure == 0:
 			if player_position.y == monster_position.y:
-				return true
+				if player_position.x-1 == monster_position.x or player_position.x+1 == monster_position.x:
+					return true
 		if room.treasure == 1 or room.treasure == 2:
 			if player_position.y == monster_position.y or player_position.y+1 == monster_position.y or player_position.y-1 == monster_position.y:
-				return true
-		return false
+				if player_position.x-1 == monster_position.x or player_position.x+1 == monster_position.x:
+					return true
+	return false
 
 func gridify():
 	monster_position = monster_position/grid_size
