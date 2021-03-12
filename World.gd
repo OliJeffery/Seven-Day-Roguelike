@@ -9,8 +9,8 @@ var player
 var fall_distance = 6
 var gravity = 100
 var monster_turn
-var monster_ratio = 0
-var treasure_ratio = 1
+var monster_ratio = .02
+var treasure_ratio = 0.1
 var weapon = load("res://sword_rusty.tscn")
 var game_over = false
 var level = 0
@@ -85,10 +85,10 @@ func new_room():
 		destroy_room()
 	chest_open = false
 	oubliette = generator.instance()
+	print(treasure)
 	if treasure == number_of_treasures:
 		treasure_ratio = 0
-	#oubliette.monster_ratio = monster_ratio
-	oubliette.monster_ratio = 0
+	oubliette.monster_ratio = monster_ratio
 	oubliette.treasure_ratio = treasure_ratio
 	monster_ratio+=.015
 	treasure_ratio+=.1

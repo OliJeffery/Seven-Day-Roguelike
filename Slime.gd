@@ -12,15 +12,23 @@ var continue_moving
 var motion = Vector2()
 var walking = false
 var player
+var type = 'slime'
+var dead = false
 
 func _ready():
 	sprite = get_node("Sprite")
 
 func _physics_process(delta):
-	if walking:
-		walk()
-	if moving and !walking and !player.falling:
-		move_monster(delta)
+	if !dead:
+		if walking:
+			walk()
+		if moving and !walking and !player.falling:
+			move_monster(delta)
+			
+func die():
+	# Play dying animation
+	dead = true
+	hide()
 
 func move_monster(delta):
 	player_position = player.global_position
