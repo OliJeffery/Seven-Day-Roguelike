@@ -22,8 +22,12 @@ func attack():
 		gridify()
 		print('PLAYER: ', player_position)
 		print('SLIME: ', monster_position)
-		if player_position.x+1 == monster_position.x:		
-			slime_body.die()
+		if player.direction == "right":
+			if player_position.x+1 == monster_position.x:		
+				slime_body.die()
+		if player.direction == "left":
+			if player_position.x-1 == monster_position.x:		
+				slime_body.die()
 
 
 func gridify():
