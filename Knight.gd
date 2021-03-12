@@ -18,6 +18,8 @@ var monster_turn = false
 var player_turns = 2
 var current_turn = 0
 var weapon 
+var dead = false
+var scene_loading
 
 func _ready():
 	player = get_node(".")
@@ -28,7 +30,7 @@ func _ready():
 
 func _physics_process(delta):
 	
-	if !walking && !falling && !monster_turn:
+	if !walking && !falling && !monster_turn && !dead && !scene_loading:
 		
 		$Sprite/AnimationPlayer.play("Idle")
 		

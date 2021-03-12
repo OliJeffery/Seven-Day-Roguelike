@@ -11,27 +11,37 @@ var gravity = 100
 var monster_turn
 var monster_ratio = 0
 var weapon = load("res://sword_rusty.tscn")
+var game_over = false
 
 func _ready():
-	new_room()
+	print('NEW GAME')
+	new_room()	
 
 func _process(delta):
-	if !player_body.falling:
-		monster_turn = player_body.monster_turn
-		if player_body.final_position == oubliette.positions['pit']:
-			pit_goes_nom()
-		if oubliette.global_position.y > 0:
-			oubliette.global_position.y -= gravity*delta
-		else:
-			player.z_index = 0	
-		if monster_turn:
-			print('monster_turn')
-			var slimes = oubliette.get_tree().get_nodes_in_group('slimes')
-			for slime in slimes:
-				var slime_body = slime.get_node('slime_body')
-				slime_body.moving = true
-				slime_body.player_position = player_body.global_position
-			player_body.monster_turn = false
+	if !game_over:
+		if player_body.dead:
+			game_over()
+		if !player_body.falling:
+			monster_turn = player_body.monster_turn
+			if player_body.final_position == oubliette.positions['pit']:
+				pit_goes_nom()
+			if oubliette.global_position.y > 0:
+				player_body.scene_loading = true
+				oubliette.global_position.y -= gravity*delta
+			else:
+				player_body.scene_loading = false
+				player.z_index = 0	
+			if monster_turn:
+				print('monster_turn')
+				var slimes = oubliette.get_tree().get_nodes_in_group('slimes')
+				for slime in slimes:
+					var slime_body = slime.get_node('slime_body')
+					slime_body.moving = true
+					slime_body.player = player_body
+				player_body.monster_turn = false
+	else:
+		if Input.is_action_just_pressed("ui_accept"):
+			get_tree().reload_current_scene()
 			
 func pit_goes_nom():
 	player.hide()
@@ -65,8 +75,16 @@ func new_room():
 	player_body.grid_size = grid_size
 	player_body.room_area = room_area
 	player_body.initial_position = Vector2(7.5,-1)
+	player_body.get_node('game_over').hide()
 	add_child(player)	
 	
 func destroy_room():
 	oubliette.queue_free()
 	player.queue_free()
+	
+func game_over():
+	game_over = true
+	player_body.get_node('Sprite').hide()
+	player_body.weapon = null
+	player_body.get_node('game_over').show()
+	print('GAME OVER')

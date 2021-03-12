@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/knight.png" type="Texture" id=1]
 [ext_resource path="res://Knight.gd" type="Script" id=2]
+[ext_resource path="res://04B_30__.TTF" type="DynamicFontData" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -50,14 +51,14 @@ tracks/0/keys = {
 "values": [ 3, 4, 5, 6, 7 ]
 }
 
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 3 )
+
 [node name="player_knight" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
 z_index = 1
 script = ExtResource( 2 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
-polygon = PoolVector2Array( 5.58728, 4.03567, 5.30666, 13.4363, -5.07611, 13.7169, -4.51488, -3.54095, 5.72758, -2.55879 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
 position = Vector2( 0.420921, 0.841846 )
@@ -74,3 +75,14 @@ anims/Walking = SubResource( 3 )
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
 zoom = Vector2( 1.5, 1.5 )
+
+[node name="game_over" type="RichTextLabel" parent="Player"]
+margin_left = -33.3214
+margin_top = -15.1191
+margin_right = 62.6786
+margin_bottom = 24.8809
+custom_fonts/normal_font = SubResource( 4 )
+text = "GAME OVER!"
+__meta__ = {
+"_edit_use_anchors_": false
+}

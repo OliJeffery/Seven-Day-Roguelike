@@ -11,6 +11,7 @@ var sprite
 var continue_moving
 var motion = Vector2()
 var walking = false
+var player
 
 func _ready():
 	sprite = get_node("Sprite")
@@ -18,10 +19,11 @@ func _ready():
 func _physics_process(delta):
 	if walking:
 		walk()
-	if moving and !walking:
+	if moving and !walking and !player.falling:
 		move_monster(delta)
 
 func move_monster(delta):
+	player_position = player.global_position
 	gridify()
 	if monster_position.y > player_position.y:
 		direction = "up"
@@ -53,12 +55,13 @@ func move_monster(delta):
 		walking = true
 	else:
 		walking = false
+		player.dead = true
 	
 func gridify():
 	monster_position = global_position/grid_size
 	monster_position.x = floor(monster_position.x) + 1
 	monster_position.y = floor(monster_position.y) + 1
-	player_position = player_position/grid_size
+	player_position = player.global_position/grid_size
 	player_position.x = floor(player_position.x) + 1
 	player_position.y = floor(player_position.y) + 2		
 
@@ -83,3 +86,8 @@ func walk():
 		global_position = destination
 		walking = false
 		moving = false
+		gridify()
+		print('PLAYER ', player_position)
+		print('MONSTER', monster_position)
+		if player_position == monster_position:
+			player.dead = true
