@@ -18,6 +18,7 @@ var level = 0
 var chest_open = false
 var treasure = 0
 var number_of_treasures = 3
+var player_turns = 2
 
 func _ready():
 	print('NEW GAME')
@@ -107,6 +108,7 @@ func new_room():
 	player = player_mould.instance()
 	player.z_index = 3
 	player_body = player.get_node('Player')
+	player_body.player_turns = player_turns
 	player_body.weapon = weapon.instance()
 	player_body.weapon.get_node('sword').get_node('Sprite').texture = weapon_sprite
 	player_body.grid_size = grid_size
@@ -138,9 +140,11 @@ func get_treasure():
 		weapon_sprite = load("res://assets/sword_magic.png")
 		sword_sprite.texture = weapon_sprite
 		player_body.player_turns = 3
+		player_turns = 3
 	elif treasure == 3:
 		weapon_sprite = load("res://assets/key.png")
 		sword_sprite.texture = weapon_sprite
 		player_body.player_turns = 1
+		player_turns = 1
 		player_body.has_key = true
 	
