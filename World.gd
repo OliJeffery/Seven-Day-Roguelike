@@ -75,7 +75,7 @@ func check_for_treasure():
 		if open_treasure:
 			oubliette.chest.open()
 			treasure+=1
-			
+			get_treasure()
 	return open_treasure	
 			
 func new_room():
@@ -125,3 +125,13 @@ func game_over():
 	player_body.z_index = 10
 	game_over_sign.show()
 	print('GAME OVER')
+	
+func get_treasure():
+	if treasure == 1:
+		weapon = load("res://sword_shiny.tscn")
+	elif treasure == 2:
+		weapon = load("res://sword_magic.tscn")
+	elif treasure == 3:
+		weapon = load("res://key.tscn")
+	
+	player_body.weapon = weapon.instance()
