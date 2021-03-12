@@ -31,6 +31,10 @@ func _physics_process(delta):
 	if !walking && !falling && !monster_turn:
 		
 		$Sprite/AnimationPlayer.play("Idle")
+		
+		if Input.is_action_just_pressed("ui_accept"):
+			weapon.attack()
+			player_turn_over()
 	
 		if Input.is_action_just_pressed("ui_right"):
 			destination.x = player.global_position.x + grid_size
@@ -99,7 +103,10 @@ func walk():
 		walking = false	
 		final_position.x = ceil(player.global_position.x)
 		final_position.y = player.global_position.y + 9
-		current_turn += 1
-		if current_turn == player_turns && !falling:
-			current_turn = 0
-			monster_turn = true
+		player_turn_over()
+		
+func player_turn_over():
+	current_turn += 1
+	if current_turn == player_turns && !falling:
+		current_turn = 0
+		monster_turn = true

@@ -5,8 +5,6 @@ var grid_size
 
 func _ready():
 	room = get_parent().get_node("Floor")
-	print(room.width)
-	print(room.height)
 	grid_size = get_parent().grid_size
 	# Top edges
 	for x in range(room.width-2):
