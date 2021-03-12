@@ -19,6 +19,8 @@ var chest_open = false
 var treasure = 0
 var number_of_treasures = 3
 var player_turns = 2
+var game_text = "Find the key to escape! WASD to move, Space to attack!"
+
 
 func _ready():
 	print('NEW GAME')
@@ -171,5 +173,6 @@ func get_treasure():
 		sword_sprite.texture = weapon_sprite
 		player_body.player_turns = 1
 		player_turns = 1
+		monster_turn=true
 		player_body.has_key = true
 	

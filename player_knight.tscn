@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/knight.png" type="Texture" id=1]
 [ext_resource path="res://Knight.gd" type="Script" id=2]
-[ext_resource path="res://04B_30__.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://medieval-pixel.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -52,7 +52,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="DynamicFont" id=4]
-font_data = ExtResource( 3 )
+outline_size = 1
+outline_color = Color( 1, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [node name="player_knight" type="Node2D"]
 
