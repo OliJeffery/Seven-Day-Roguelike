@@ -70,7 +70,7 @@ func check_for_treasure():
 		if player_position.y == chest_position.y + grid_size or player_position.y == chest_position.y - grid_size:
 			open_treasure = true
 	if open_treasure:
-		print("Opening treasure")
+		oubliette.chest.open()
 	return open_treasure	
 			
 func new_room():
