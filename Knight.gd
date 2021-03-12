@@ -7,7 +7,7 @@ var distance
 var walking = false
 var destination = Vector2()
 var player 
-var direction
+var direction = "right"
 var continue_moving = false
 var room_area = Vector2()
 var initial_position = Vector2()
@@ -91,9 +91,13 @@ func walk():
 	$Sprite/AnimationPlayer.play("Walking")
 	if direction == "right" && player.global_position.x < destination.x:
 		sprite.set_flip_h(false)
+		weapon.get_node('sword').get_node('Sprite').set_flip_h(false)
+		weapon.position.x = 0
 		continue_moving = true
 	elif direction == "left" && player.global_position.x > destination.x:
 		sprite.set_flip_h(true)
+		weapon.get_node('sword').get_node('Sprite').set_flip_h(true)
+		weapon.position.x = -grid_size
 		continue_moving = true
 	elif direction == "up" && player.global_position.y > destination.y:
 		continue_moving = true

@@ -12,7 +12,10 @@ func attack():
 	player = get_parent()
 	grid_size = player.grid_size
 	room = player.get_parent().get_parent()
-	$KinematicBody2D/AnimationPlayer.play("Swing sword")
+	if player.direction == "left":
+		$sword/AnimationPlayer.play("Swing sword (copy)")
+	else:
+		$sword/AnimationPlayer.play("Swing sword")
 	var slimes = room.get_tree().get_nodes_in_group('slimes')
 	player_position = player.global_position
 	for slime in slimes:
@@ -20,13 +23,11 @@ func attack():
 		monster_position = slime_body.global_position
 		print(monster_position)
 		gridify()
-		print('PLAYER: ', player_position)
-		print('SLIME: ', monster_position)
 		if player.direction == "right":
-			if player_position.x+1 == monster_position.x:		
+			if player_position.x+1 == monster_position.x:	
 				slime_body.die()
 		if player.direction == "left":
-			if player_position.x-1 == monster_position.x:		
+			if player_position.x-1 == monster_position.x:
 				slime_body.die()
 
 
