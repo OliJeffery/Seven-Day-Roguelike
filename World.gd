@@ -10,6 +10,7 @@ var fall_distance = 6
 var gravity = 100
 var monster_turn
 var monster_ratio = 0
+var weapon = load("res://sword_rusty.tscn")
 
 func _ready():
 	new_room()
@@ -60,6 +61,7 @@ func new_room():
 	player = player_mould.instance()
 	player.z_index = 3
 	player_body = player.get_node('Player')
+	player_body.weapon = weapon.instance()
 	player_body.grid_size = grid_size
 	player_body.room_area = room_area
 	player_body.initial_position = Vector2(7.5,-1)

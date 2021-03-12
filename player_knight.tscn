@@ -53,6 +53,7 @@ tracks/0/keys = {
 [node name="player_knight" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
+z_index = 1
 script = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]

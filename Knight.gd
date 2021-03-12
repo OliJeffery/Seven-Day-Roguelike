@@ -17,11 +17,14 @@ var falling = false
 var monster_turn = false
 var player_turns = 2
 var current_turn = 0
+var weapon 
 
 func _ready():
 	player = get_node(".")
 	player.global_position = initial_position
 	sprite = player.get_node("Sprite")
+	add_child(weapon)
+	weapon.z_index=0
 
 func _physics_process(delta):
 	

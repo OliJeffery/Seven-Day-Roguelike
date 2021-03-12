@@ -113,7 +113,7 @@ format = 1
 script = ExtResource( 5 )
 
 [node name="Wall edges" type="TileMap" parent="."]
-z_index = 1
+z_index = 2
 tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
