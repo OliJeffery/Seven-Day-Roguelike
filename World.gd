@@ -11,7 +11,8 @@ var gravity = 100
 var monster_turn
 var monster_ratio = .02
 var treasure_ratio = 0.1
-var weapon = load("res://sword_rusty.tscn")
+var weapon = load("res://sword.tscn")
+var weapon_sprite = load("res://assets/sword_rusty.png")
 var game_over = false
 var level = 0
 var chest_open = false
@@ -107,6 +108,7 @@ func new_room():
 	player.z_index = 3
 	player_body = player.get_node('Player')
 	player_body.weapon = weapon.instance()
+	player_body.weapon.get_node('sword').get_node('Sprite').texture = weapon_sprite
 	player_body.grid_size = grid_size
 	player_body.room_area = room_area
 	player_body.initial_position = Vector2(7.5,-1)
@@ -127,13 +129,18 @@ func game_over():
 	print('GAME OVER')
 	
 func get_treasure():
+	var sword_sprite = player_body.weapon.get_node('sword').get_node('Sprite')
+	#var respawn_sprite = weapon.get_node('sword').get_node('Sprite')
 	if treasure == 1:
-		weapon = load("res://sword_shiny.tscn")
+		weapon_sprite = load("res://assets/sword_shiny.png")
+		sword_sprite.texture = weapon_sprite 
 	elif treasure == 2:
-		weapon = load("res://sword_magic.tscn")
+		weapon_sprite = load("res://assets/sword_magic.png")
+		sword_sprite.texture = weapon_sprite
+		player_body.player_turns = 3
 	elif treasure == 3:
-		weapon = load("res://key.tscn")
+		weapon_sprite = load("res://assets/key.png")
+		sword_sprite.texture = weapon_sprite
+		player_body.player_turns = 1
+		player_body.has_key = true
 	
-	player_body.weapon.queue_free()
-	player_body.weapon = weapon.instance()
-	player_body.update_weapon()

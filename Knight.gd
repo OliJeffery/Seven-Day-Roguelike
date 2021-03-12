@@ -20,6 +20,7 @@ var current_turn = 0
 var weapon 
 var dead = false
 var scene_loading
+var has_key = false
 
 func _ready():
 	player = get_node(".")

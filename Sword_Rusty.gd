@@ -5,7 +5,6 @@ var grid_size
 var room
 var player_position
 var monster_position
-	
 
 
 func attack():	
@@ -21,14 +20,22 @@ func attack():
 	for slime in slimes:
 		var slime_body = slime.get_node('slime_body')
 		monster_position = slime_body.global_position
-		print(monster_position)
 		gridify()
-		if player.direction == "right":
-			if player_position.x+1 == monster_position.x:	
-				slime_body.die()
-		if player.direction == "left":
-			if player_position.x-1 == monster_position.x:
-				slime_body.die()
+		if room.treasure == 0:
+			if player_position.y == monster_position.y:
+				if player.direction == "left":
+					if player_position.x-1 == monster_position.x:
+						slime_body.die()
+				else:
+					if player_position.x+1 == monster_position.x:	
+						slime_body.die()
+		if room.treasure == 1 or room.treasure == 2:
+			if player.direction == "left":
+				if player_position.x-1 == monster_position.x:
+					slime_body.die()
+			else:
+				if player_position.x+1 == monster_position.x:	
+					slime_body.die()
 
 
 func gridify():
