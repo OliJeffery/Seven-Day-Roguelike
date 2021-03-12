@@ -15,6 +15,8 @@ var weapon = load("res://sword_rusty.tscn")
 var game_over = false
 var level = 0
 var chest_open = false
+var treasure = 0
+var number_of_treasures = 3
 
 func _ready():
 	print('NEW GAME')
@@ -61,16 +63,19 @@ func check_for_pit():
 
 func check_for_treasure():
 	var open_treasure = false
-	var player_position = player_body.final_position
-	var chest_position = oubliette.positions['chest']
-	if	player_position.y == chest_position.y:
-		if player_position.x == chest_position.x + grid_size or player_position.x == chest_position.x - grid_size:
-			open_treasure = true
-	elif	player_position.x == chest_position.x:
-		if player_position.y == chest_position.y + grid_size or player_position.y == chest_position.y - grid_size:
-			open_treasure = true
-	if open_treasure:
-		oubliette.chest.open()
+	if oubliette.positions.has('chest'):
+		var player_position = player_body.final_position
+		var chest_position = oubliette.positions['chest']
+		if	player_position.y == chest_position.y:
+			if player_position.x == chest_position.x + grid_size or player_position.x == chest_position.x - grid_size:
+				open_treasure = true
+		elif	player_position.x == chest_position.x:
+			if player_position.y == chest_position.y + grid_size or player_position.y == chest_position.y - grid_size:
+				open_treasure = true
+		if open_treasure:
+			oubliette.chest.open()
+			treasure+=1
+			
 	return open_treasure	
 			
 func new_room():
@@ -80,7 +85,10 @@ func new_room():
 		destroy_room()
 	chest_open = false
 	oubliette = generator.instance()
-	oubliette.monster_ratio = monster_ratio
+	if treasure == number_of_treasures:
+		treasure_ratio = 0
+	#oubliette.monster_ratio = monster_ratio
+	oubliette.monster_ratio = 0
 	oubliette.treasure_ratio = treasure_ratio
 	monster_ratio+=.015
 	treasure_ratio+=.1
