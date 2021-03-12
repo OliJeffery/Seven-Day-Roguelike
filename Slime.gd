@@ -5,7 +5,7 @@ var player_position
 var monster_position
 var grid_size
 var direction
-var slime_speed = 10
+var slime_speed = 36
 var destination = Vector2()
 var sprite
 var continue_moving

@@ -15,6 +15,8 @@ var sprite
 var final_position = Vector2()
 var falling = false
 var monster_turn = false
+var player_turns = 2
+var current_turn = 0
 
 func _ready():
 	player = get_node(".")
@@ -23,7 +25,7 @@ func _ready():
 
 func _physics_process(delta):
 	
-	if !walking && !falling:
+	if !walking && !falling && !monster_turn:
 		
 		$Sprite/AnimationPlayer.play("Idle")
 	
@@ -94,4 +96,7 @@ func walk():
 		walking = false	
 		final_position.x = ceil(player.global_position.x)
 		final_position.y = player.global_position.y + 9
-		monster_turn = true
+		current_turn += 1
+		if current_turn == player_turns:
+			current_turn = 0
+			monster_turn = true

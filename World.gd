@@ -9,6 +9,7 @@ var player
 var fall_distance = 6
 var gravity = 100
 var monster_turn
+var monster_ratio = 0
 
 func _ready():
 	new_room()
@@ -43,6 +44,8 @@ func new_room():
 	if oubliette:
 		destroy_room()
 	oubliette = generator.instance()
+	oubliette.monster_ratio = monster_ratio
+	monster_ratio+=.02
 	#oubliette.width = 6
 	#oubliette.height = 6
 	oubliette.set_name("oubliette")
