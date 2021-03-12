@@ -97,6 +97,6 @@ func walk():
 		final_position.x = ceil(player.global_position.x)
 		final_position.y = player.global_position.y + 9
 		current_turn += 1
-		if current_turn == player_turns:
+		if current_turn == player_turns && !falling:
 			current_turn = 0
 			monster_turn = true

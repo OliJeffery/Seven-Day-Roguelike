@@ -26,8 +26,8 @@ func spawn_monsters():
 	for i in range(number_of_monsters):
 		var slime_instance = slime.instance()
 		var spawn = Vector2()
-		spawn.x = (rng.randi_range(1,room.width)*grid_size)-(grid_size/2);
-		spawn.y = (rng.randi_range(1,room.height)*grid_size)-(grid_size/2) - 2;
+		spawn.x = (rng.randi_range(3,room.width)*grid_size)-(grid_size/2);
+		spawn.y = (rng.randi_range(3,room.height)*grid_size)-(grid_size/2) - 2;
 		slime_instance.global_position = spawn
 		slime_instance.get_node('slime_body').grid_size = grid_size
 		add_child(slime_instance)
@@ -40,8 +40,8 @@ func spawn_door():
 
 func spawn_pit():
 	var spawn = Vector2()
-	spawn.x = (rng.randi_range(1,room.width)*grid_size)-(grid_size/2);
-	spawn.y = (rng.randi_range(1,room.height)*grid_size)-(grid_size/2);
+	spawn.x = (rng.randi_range(2,room.width-1)*grid_size)-(grid_size/2);
+	spawn.y = (rng.randi_range(2,room.height-1)*grid_size)-(grid_size/2);
 	positions['pit'] = spawn
 	pit.global_position = spawn
 	add_child(pit)

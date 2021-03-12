@@ -45,7 +45,7 @@ func new_room():
 		destroy_room()
 	oubliette = generator.instance()
 	oubliette.monster_ratio = monster_ratio
-	monster_ratio+=.02
+	monster_ratio+=.015
 	#oubliette.width = 6
 	#oubliette.height = 6
 	oubliette.set_name("oubliette")
