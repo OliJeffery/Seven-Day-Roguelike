@@ -2,7 +2,7 @@ extends Node2D
 
 var width
 var height
-var monster_ratio = .1
+var monster_ratio = .05
 var number_of_monsters
 var room
 var area

@@ -43,6 +43,8 @@ func new_room():
 	if oubliette:
 		destroy_room()
 	oubliette = generator.instance()
+	#oubliette.width = 6
+	#oubliette.height = 6
 	oubliette.set_name("oubliette")
 	oubliette.grid_size = grid_size
 	oubliette.global_position = Vector2(0, fall_distance*grid_size)
