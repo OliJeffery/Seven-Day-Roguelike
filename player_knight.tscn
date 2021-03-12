@@ -86,3 +86,15 @@ text = "GAME OVER!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="you_win" type="RichTextLabel" parent="Player"]
+visible = false
+margin_left = -33.3214
+margin_top = -15.1191
+margin_right = 62.6786
+margin_bottom = 24.8809
+custom_fonts/normal_font = SubResource( 4 )
+text = "YOU WIN!"
+__meta__ = {
+"_edit_use_anchors_": false
+}

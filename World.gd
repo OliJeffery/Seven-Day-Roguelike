@@ -30,6 +30,7 @@ func _process(delta):
 			game_over()
 		if !player_body.falling:
 			check_for_pit()
+			check_for_door()
 			if !chest_open:
 				chest_open = check_for_treasure()	
 			if oubliette.global_position.y > 0:
@@ -63,6 +64,20 @@ func check_for_pit():
 	if player_body.final_position == oubliette.positions['pit']:
 		pit_goes_nom()
 
+func check_for_door():
+	if player_body.final_position.y + 6 == oubliette.positions['door1'].y:
+		if player_body.final_position.x + grid_size/2 == oubliette.positions['door1'].x:
+			try_the_door()
+		if player_body.final_position.x + grid_size/2 == oubliette.positions['door2'].x:
+			try_the_door()
+
+func try_the_door():
+	print("TRYING THE DOOR")
+	if player_body.has_key:
+		you_win()
+	else:
+		print('DOOR LOCKED')
+		
 func check_for_treasure():
 	var open_treasure = false
 	if oubliette.positions.has('chest'):
@@ -121,10 +136,21 @@ func destroy_room():
 	oubliette.queue_free()
 	player.queue_free()
 	
+func you_win():
+	print("YOU WIN!!!")	
+	game_over = true
+	player_body.get_node('Sprite').hide()
+	player_body.weapon.get_node('sword').get_node('Sprite').hide()
+	var game_over_sign = player_body.get_node('you_win')
+	player_body.z_index = 10
+	game_over_sign.show()
+	
+	
+
 func game_over():
 	game_over = true
 	player_body.get_node('Sprite').hide()
-	player_body.weapon = null
+	player_body.weapon.get_node('sword').get_node('Sprite').hide()
 	var game_over_sign = player_body.get_node('game_over')
 	player_body.z_index = 10
 	game_over_sign.show()
@@ -132,7 +158,6 @@ func game_over():
 	
 func get_treasure():
 	var sword_sprite = player_body.weapon.get_node('sword').get_node('Sprite')
-	#var respawn_sprite = weapon.get_node('sword').get_node('Sprite')
 	if treasure == 1:
 		weapon_sprite = load("res://assets/sword_shiny.png")
 		sword_sprite.texture = weapon_sprite 

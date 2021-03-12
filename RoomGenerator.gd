@@ -28,8 +28,6 @@ func _ready():
 	spawn_pit()
 	if treasure > treasure_chance:
 		spawn_treasure()
-	else:
-		print(treasure)
 		
 func spawn_monsters():
 	for i in range(number_of_monsters):
@@ -44,11 +42,13 @@ func spawn_monsters():
 		
 func spawn_door():
 	door.z_index = 2
-	door.global_position = Vector2(room.width/2*grid_size, room.height*grid_size-2)
+	var spawn = Vector2(room.width/2*grid_size, room.height*grid_size-2)
+	door.global_position = spawn
+	positions['door1'] = spawn
+	positions['door2'] = Vector2(spawn.x+grid_size, spawn.y)
 	add_child(door)
 	
 func spawn_treasure():
-	print('SPAWNING TREASURE')
 	var spawn = Vector2()
 	spawn.x = (rng.randi_range(2,room.width-1)*grid_size)-(grid_size/2);
 	spawn.y = (rng.randi_range(2,room.height-1)*grid_size)-(grid_size/2);
