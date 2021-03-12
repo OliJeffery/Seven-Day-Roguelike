@@ -38,7 +38,6 @@ func attack():
 					if player_position.x+1 == monster_position.x:	
 						slime_body.die()
 
-
 func gridify():
 	monster_position = monster_position/grid_size
 	monster_position.x = floor(monster_position.x) + 1

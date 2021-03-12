@@ -21,6 +21,8 @@ var weapon
 var dead = false
 var scene_loading
 var has_key = false
+var player_position
+var monster_position
 
 func _ready():
 	player = get_node(".")
@@ -39,8 +41,11 @@ func _physics_process(delta):
 		$Sprite/AnimationPlayer.play("Idle")
 		
 		if Input.is_action_just_pressed("ui_accept"):
-			weapon.attack()
-			player_turn_over()
+			if player_can_attack():
+				weapon.attack()
+				player_turn_over()
+			
+			print('No mobs nearby')
 	
 		if Input.is_action_just_pressed("ui_right"):
 			destination.x = player.global_position.x + grid_size
@@ -122,3 +127,27 @@ func player_turn_over():
 	if current_turn == player_turns && !falling:
 		current_turn = 0
 		monster_turn = true
+
+func player_can_attack():
+	var room = get_parent().get_parent()
+	var slimes = room.get_tree().get_nodes_in_group('slimes')
+	player_position = global_position
+	for slime in slimes:
+		var slime_body = slime.get_node('slime_body')
+		monster_position = slime_body.global_position
+		gridify()
+		if room.treasure == 0:
+			if player_position.y == monster_position.y:
+				return true
+		if room.treasure == 1 or room.treasure == 2:
+			if player_position.y == monster_position.y or player_position.y+1 == monster_position.y or player_position.y-1 == monster_position.y:
+				return true
+		return false
+
+func gridify():
+	monster_position = monster_position/grid_size
+	monster_position.x = floor(monster_position.x) + 1
+	monster_position.y = floor(monster_position.y) + 1
+	player_position = player.global_position/grid_size
+	player_position.x = floor(player_position.x) + 1
+	player_position.y = floor(player_position.y) + 2
