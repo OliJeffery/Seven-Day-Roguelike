@@ -20,6 +20,7 @@ tracks/0/keys = {
 }
 
 [node name="Slime" type="Node2D"]
+z_index = 1
 
 [node name="slime_body" type="KinematicBody2D" parent="."]
 script = ExtResource( 2 )

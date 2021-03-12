@@ -12,6 +12,7 @@ var monster_turn
 var monster_ratio = 0
 var weapon = load("res://sword_rusty.tscn")
 var game_over = false
+var level = 0
 
 func _ready():
 	print('NEW GAME')
@@ -52,6 +53,8 @@ func pit_goes_nom():
 	new_room()	
 	
 func new_room():
+	level +=1
+	print("LEVEL ", level)
 	if oubliette:
 		destroy_room()
 	oubliette = generator.instance()
@@ -86,5 +89,7 @@ func game_over():
 	game_over = true
 	player_body.get_node('Sprite').hide()
 	player_body.weapon = null
-	player_body.get_node('game_over').show()
+	var game_over_sign = player_body.get_node('game_over')
+	player_body.z_index = 10
+	game_over_sign.show()
 	print('GAME OVER')

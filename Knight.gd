@@ -30,6 +30,9 @@ func _ready():
 
 func _physics_process(delta):
 	
+	if dead:
+		remove_child(weapon)
+	
 	if !walking && !falling && !monster_turn && !dead && !scene_loading:
 		
 		$Sprite/AnimationPlayer.play("Idle")

@@ -56,6 +56,11 @@ func move_monster(delta):
 	else:
 		walking = false
 		player.dead = true
+		
+	if monster_position.x > player_position.x:
+		sprite.set_flip_h(true)
+	if monster_position.x < player_position.x:
+		sprite.set_flip_h(false)
 	
 func gridify():
 	monster_position = global_position/grid_size
@@ -67,10 +72,8 @@ func gridify():
 
 func walk():
 	if direction == "right" && global_position.x < destination.x:
-		sprite.set_flip_h(false)
 		continue_moving = true
 	elif direction == "left" && global_position.x > destination.x:
-		sprite.set_flip_h(true)
 		continue_moving = true
 	elif direction == "up" && global_position.y > destination.y:
 		continue_moving = true
