@@ -10,6 +10,7 @@ var fall_distance = 6
 var gravity = 100
 var monster_turn
 var monster_ratio = 0
+var treasure_ratio = .15
 var weapon = load("res://sword_rusty.tscn")
 var game_over = false
 var level = 0
@@ -59,7 +60,9 @@ func new_room():
 		destroy_room()
 	oubliette = generator.instance()
 	oubliette.monster_ratio = monster_ratio
+	oubliette.treasure_ratio = treasure_ratio
 	monster_ratio+=.015
+	treasure_ratio+=.1
 	#oubliette.width = 6
 	#oubliette.height = 6
 	oubliette.set_name("oubliette")

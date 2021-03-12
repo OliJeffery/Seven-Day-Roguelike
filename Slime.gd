@@ -90,7 +90,5 @@ func walk():
 		walking = false
 		moving = false
 		gridify()
-		print('PLAYER ', player_position)
-		print('MONSTER', monster_position)
-		if player_position == monster_position:
+		if player_position == monster_position && !player.falling:
 			player.dead = true
