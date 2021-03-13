@@ -102,7 +102,6 @@ func check_for_door():
 		play_door_sound = true
 
 func try_the_door():
-	print("TRYING THE DOOR")
 	if player_body.has_key:
 		you_win()
 	else:
@@ -113,6 +112,9 @@ func door_is_locked():
 		print("Door is locked")
 		$door_locked.play(0)
 		play_door_sound = false
+		var door = oubliette.get_node('Door').get_node('door')
+		door.rattled = 0
+		door.rattling = true
 		
 func check_for_treasure():
 	var open_treasure = false
