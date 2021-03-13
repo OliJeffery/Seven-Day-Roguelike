@@ -134,7 +134,7 @@ func walk():
 		
 func player_turn_over():
 	current_turn += 1
-	if current_turn == player_turns && !falling:
+	if current_turn >= player_turns && !falling:
 		current_turn = 0
 		monster_turn = true
 		var room = get_parent().get_parent()
