@@ -23,6 +23,7 @@ var scene_loading
 var has_key = false
 var player_position
 var monster_position
+var play_death_sound = true
 
 func _ready():
 	player = get_node(".")
@@ -34,7 +35,10 @@ func _ready():
 func _physics_process(delta):
 	
 	if dead:
-		remove_child(weapon)
+		if play_death_sound:
+			remove_child(weapon)
+			$die.play()
+			play_death_sound = false
 	
 	if !walking && !falling && !monster_turn && !dead && !scene_loading:
 		
@@ -43,6 +47,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("ui_accept"):
 			if player_can_attack():
 				weapon.attack()
+				$slash.play()
 				player_turn_over()
 			print('No mobs nearby')
 	
@@ -54,6 +59,7 @@ func _physics_process(delta):
 			direction = "right"
 			if destination.x > room_area.x:
 				return
+			$walk.play(0)
 			walking = true
 		
 		if Input.is_action_just_pressed("ui_left"):
@@ -64,6 +70,7 @@ func _physics_process(delta):
 			direction = "left"
 			if destination.x < 0:
 				return
+			$walk.play(0)
 			walking = true
 			
 		if Input.is_action_just_pressed("ui_down"):
@@ -74,6 +81,7 @@ func _physics_process(delta):
 			direction = "down"
 			if destination.y >= room_area.y - grid_size:
 				return
+			$walk.play(0)
 			walking = true
 			
 		if Input.is_action_just_pressed("ui_up"):
@@ -84,6 +92,7 @@ func _physics_process(delta):
 			direction = "up"
 			if destination.y <= - grid_size:
 				return
+			$walk.play(0)
 			walking = true
 			
 	if walking:
@@ -126,6 +135,10 @@ func player_turn_over():
 	if current_turn == player_turns && !falling:
 		current_turn = 0
 		monster_turn = true
+		var room = get_parent().get_parent()
+		var slimes = room.get_tree().get_nodes_in_group('slimes')
+		if slimes != []:
+			$slime_move.play()
 
 func player_can_attack():
 	var room = get_parent().get_parent()

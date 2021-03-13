@@ -15,6 +15,7 @@ var player
 var type = 'slime'
 var dead = false
 
+
 func _ready():
 	sprite = get_node("Sprite")
 

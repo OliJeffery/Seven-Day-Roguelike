@@ -20,6 +20,8 @@ var treasure = 0
 var number_of_treasures = 3
 var player_turns = 2
 var game_text = "Find the key to escape! WASD to move, Space to attack!"
+var play_door_sound = true
+var play_landing_sound = true
 
 
 func _ready():
@@ -34,13 +36,20 @@ func _process(delta):
 			check_for_pit()
 			check_for_door()
 			if !chest_open:
-				chest_open = check_for_treasure()	
+				chest_open = check_for_treasure()
+		
 			if oubliette.global_position.y > 0:
 				player_body.scene_loading = true
 				oubliette.global_position.y -= gravity*delta
+				play_landing_sound = true
 			else:
-				player_body.scene_loading = false
-				player.z_index = 0	
+				if play_landing_sound:
+					player_body.scene_loading = false
+					player.z_index = 0
+					$land.play()
+					play_landing_sound = false
+				
+				
 			if monster_turn:
 				print('monster_turn')
 				var slimes = oubliette.get_tree().get_nodes_in_group('slimes')
@@ -54,6 +63,8 @@ func _process(delta):
 			get_tree().reload_current_scene()
 			
 func pit_goes_nom():
+	$fall_in_pit.play()
+	play_landing_sound = true
 	player.hide()
 	player_body.falling = true
 	var pit = oubliette.pit.get_node("Pit")
@@ -70,15 +81,25 @@ func check_for_door():
 	if player_body.final_position.y + 6 == oubliette.positions['door1'].y:
 		if player_body.final_position.x + grid_size/2 == oubliette.positions['door1'].x:
 			try_the_door()
-		if player_body.final_position.x + grid_size/2 == oubliette.positions['door2'].x:
+		elif player_body.final_position.x + grid_size/2 == oubliette.positions['door2'].x:
 			try_the_door()
+		else:
+			play_door_sound = true
+	else:
+		play_door_sound = true
 
 func try_the_door():
 	print("TRYING THE DOOR")
 	if player_body.has_key:
 		you_win()
 	else:
-		print('DOOR LOCKED')
+		door_is_locked()
+		
+func door_is_locked():
+	if play_door_sound:
+		print("Door is locked")
+		$door_locked.play(0)
+		play_door_sound = false
 		
 func check_for_treasure():
 	var open_treasure = false
@@ -159,6 +180,7 @@ func game_over():
 	print('GAME OVER')
 	
 func get_treasure():
+	$power_up.play()
 	var sword_sprite = player_body.weapon.get_node('sword').get_node('Sprite')
 	if treasure == 1:
 		weapon_sprite = load("res://assets/sword_shiny.png")
