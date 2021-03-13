@@ -102,6 +102,9 @@ func walk():
 		gridify()
 		if player_position == monster_position && !player.falling:
 			player.dead = true
+			$AnimationPlayer.play("Nom")
+			yield(get_node("AnimationPlayer"), "animation_finished")
+			$AnimationPlayer.play("Chew")
 		else:
 			player.slimes_moved += 1
 		if player.slime_moves == player.slimes_moved:
