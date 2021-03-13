@@ -29,6 +29,8 @@ func _physics_process(delta):
 func die():
 	# Play dying animation
 	dead = true
+	$AnimationPlayer.play("Die")
+	yield(get_node("AnimationPlayer"), "animation_finished")
 	queue_free()
 
 func move_monster(delta):
