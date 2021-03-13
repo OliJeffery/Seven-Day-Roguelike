@@ -9,7 +9,7 @@ var player
 var fall_distance = 6
 var gravity = 100
 var monster_turn
-var monster_ratio = .05
+var monster_ratio = .075
 var treasure_ratio = 0.2
 var weapon = load("res://sword.tscn")
 var weapon_sprite = load("res://assets/sword_rusty.png")

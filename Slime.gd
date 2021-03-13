@@ -28,7 +28,7 @@ func _physics_process(delta):
 func die():
 	# Play dying animation
 	dead = true
-	hide()
+	queue_free()
 
 func move_monster(delta):
 	player_position = player.global_position
