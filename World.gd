@@ -53,6 +53,8 @@ func _process(delta):
 				var slimes = oubliette.get_tree().get_nodes_in_group('slimes')
 				player_body.slime_moves = slimes.size()
 				player_body.slimes_moved = 0
+				if slimes.size() == 0:
+					player_body.monster_turn = false
 				for slime in slimes:
 					var slime_body = slime.get_node('slime_body')
 					slime_body.moving = true
