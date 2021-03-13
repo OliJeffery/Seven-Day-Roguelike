@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/CHIPTUNE_The_Bards_Tale.wav-543b1cf73f2485b198005a039e3912b6.sample"
+
+[deps]
+
+source_file="res://assets/CHIPTUNE_The_Bards_Tale.wav"
+dest_files=[ "res://.import/CHIPTUNE_The_Bards_Tale.wav-543b1cf73f2485b198005a039e3912b6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
