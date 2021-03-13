@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://assets/CHIPTUNE_The_Bards_Tale.wav" type="AudioStream" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/sfx_movement_portal1.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sfx_sounds_powerup3.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sfx_movement_jump17_landing.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/Victory.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/boss_music.wav" type="AudioStream" id=8]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,9 +16,9 @@ script = ExtResource( 1 )
 color = Color( 0.113725, 0.0588235, 0.0588235, 1 )
 polygon = PoolVector2Array( -560.498, -375.361, -675.274, 916.698, 2764.84, 946.664, 2219.46, -659.521 )
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
+[node name="main_theme" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
-volume_db = -5.0
+volume_db = -7.0
 
 [node name="door_locked" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -31,3 +33,10 @@ volume_db = -8.0
 
 [node name="land" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+
+[node name="Victory" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+
+[node name="BossMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -7.0

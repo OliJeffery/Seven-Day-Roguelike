@@ -22,12 +22,24 @@ var player_turns = 2
 var game_text = "Find the key to escape! WASD to move, Space to attack!"
 var play_door_sound = true
 var play_landing_sound = true
+var music = 'main_theme'
+var start_music = true
 
 func _ready():
 	print('NEW GAME')
 	new_room()	
 
 func _process(delta):
+	
+	if start_music:
+		start_music = false
+		if music == 'main_theme':	
+			$main_theme.play()
+		if music == 'boss_theme':	
+			$BossMusic.play()
+		if music == 'victory':	
+			$Victory.play()
+	
 	if !game_over:
 		if player_body.dead:
 			game_over()
@@ -161,7 +173,10 @@ func destroy_room():
 	player.queue_free()
 	
 func you_win():
-	print("YOU WIN!!!")	
+	print("YOU WIN!!!")
+	music = 'victory'
+	$BossMusic.stop()
+	start_music = true	
 	game_over = true
 	player_body.get_node('Sprite').hide()
 	player_body.weapon.get_node('sword').get_node('Sprite').hide()
@@ -192,6 +207,9 @@ func get_treasure():
 		player_body.player_turns = 3
 		player_turns = 3
 	elif treasure == 3:
+		music = 'boss_theme'
+		$main_theme.stop()
+		start_music = true
 		weapon_sprite = load("res://assets/key.png")
 		sword_sprite.texture = weapon_sprite
 		player_body.player_turns = 1
