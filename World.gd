@@ -23,7 +23,6 @@ var game_text = "Find the key to escape! WASD to move, Space to attack!"
 var play_door_sound = true
 var play_landing_sound = true
 
-
 func _ready():
 	print('NEW GAME')
 	new_room()	
@@ -51,13 +50,13 @@ func _process(delta):
 				
 				
 			if monster_turn:
-				print('monster_turn')
 				var slimes = oubliette.get_tree().get_nodes_in_group('slimes')
+				player_body.slime_moves = slimes.size()
+				player_body.slimes_moved = 0
 				for slime in slimes:
 					var slime_body = slime.get_node('slime_body')
 					slime_body.moving = true
 					slime_body.player = player_body
-				player_body.monster_turn = false
 	else:
 		if Input.is_action_just_pressed("ui_accept"):
 			get_tree().reload_current_scene()

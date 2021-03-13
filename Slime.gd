@@ -98,6 +98,11 @@ func walk():
 		global_position = destination
 		walking = false
 		moving = false
+		var world = player.get_parent().get_parent()
 		gridify()
 		if player_position == monster_position && !player.falling:
 			player.dead = true
+		else:
+			player.slimes_moved += 1
+		if player.slime_moves == player.slimes_moved:
+			player.monster_turn = false

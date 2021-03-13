@@ -24,6 +24,8 @@ var has_key = false
 var player_position
 var monster_position
 var play_death_sound = true
+var slime_moves
+var slimes_moved
 
 func _ready():
 	player = get_node(".")
