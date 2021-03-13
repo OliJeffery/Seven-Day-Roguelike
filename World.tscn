@@ -40,3 +40,5 @@ stream = ExtResource( 7 )
 [node name="BossMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
 volume_db = -7.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

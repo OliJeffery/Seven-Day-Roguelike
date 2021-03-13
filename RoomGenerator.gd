@@ -11,6 +11,7 @@ var room
 var area
 var rng = RandomNumberGenerator.new()
 var slime = load("res://slime.tscn")
+var torch = load("res://torch.tscn")
 var door = load("res://door.tscn").instance()
 var pit = load("res://pit.tscn").instance()
 var chest = load("res://chest.tscn").instance()
@@ -24,11 +25,24 @@ func _ready():
 	number_of_monsters = floor(area * monster_ratio)
 	treasure = floor(area * treasure_ratio)
 	spawn_monsters()
+	spawn_torches()
 	spawn_door()
 	spawn_pit()
 	if treasure > treasure_chance:
 		spawn_treasure()
 		
+		
+func spawn_torches():
+	var x_minimum = grid_size
+	for i in rng.randi_range(1, room.width/6):
+		var torch_instance = torch.instance()
+		var spawn = Vector2()
+		spawn.y = -1*grid_size
+		spawn.x = rng.randi_range(x_minimum, (room.width-1)*grid_size)
+		torch_instance.global_position = spawn
+		add_child(torch_instance)
+		x_minimum += grid_size
+			
 func spawn_monsters():
 	for i in range(number_of_monsters):
 		var slime_instance = slime.instance()

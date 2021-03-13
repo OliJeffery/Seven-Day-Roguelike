@@ -177,13 +177,15 @@ func destroy_room():
 func you_win():
 	print("YOU WIN!!!")
 	music = 'victory'
+	var door = oubliette.get_node('Door').get_node('door')
+	door.open()
 	$BossMusic.stop()
 	start_music = true	
 	game_over = true
-	player_body.get_node('Sprite').hide()
-	player_body.weapon.get_node('sword').get_node('Sprite').hide()
 	var game_over_sign = player_body.get_node('you_win')
 	player_body.z_index = 10
+	player_body.global_position.x += grid_size/2
+	player_body.global_position.y += grid_size
 	game_over_sign.show()
 	
 	

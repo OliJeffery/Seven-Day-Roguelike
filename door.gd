@@ -13,3 +13,6 @@ func rattle_door():
 	rattled +=1
 	if rattled == 3:
 		rattling = false	
+		
+func open():
+	$AnimationPlayer.play("Open")
